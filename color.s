@@ -1,35 +1,34 @@
-ORG	0x7C00
+org	0x7C00
 
-MOV	AX,		0X0013
-INT	0X10
+mov	ax,		0x0013
+int	0x10
 
-START:	MOV		DX,		0X03DA
+start:	mov		dx,		0x03DA
 
-WAIT0:	IN		AL,		DX
-	TEST		AL,		8
-	JNZ		WAIT0
+wait0:	in		al,		dx
+	test		al,		8
+	jnz		wait0
 
-WAIT1:	IN		AL,		DX
-	TEST		AL,		8
-	JZ		WAIT1
+wait1:	in		al,		dx
+	test		al,		8
+	jz		wait1
 
-	XOR		AL,		AL
-	MOV		DX,		0X03C8
-	OUT		DX,		AL
+	xor		al,		al
+	mov		dx,		0x03C8
+	out		dx,		al
 
-	MOV		DX,		0X03C9
-	MOV		SI,		COLOR
+	mov		dx,		0x03C9
+	mov		si,		color
 
-	MOV 		ECX,		3
-	REP		OUTSB
+	mov 		ecx,		3
+rep	outsb
 
-	OR		DWORD [COLOR],	0x00C0C0C0
-	INC		DWORD [COLOR]
+	or		dword [color],	0x00C0C0C0
+	inc		dword [color]
 
-	JMP		START
+	jmp		start
 
-COLOR:			DD		0x00C0C0C0
+color:			dd		0x00C0C0C0
 
-TIMES	510-($-$$) 	DB		0
-			DB		0X55
-			DB		0XAA
+times	510-($-$$) 	db		0
+			dw		0xAA55
