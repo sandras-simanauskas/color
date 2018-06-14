@@ -1,3 +1,4 @@
+bits	16
 org	0x7C00
 
 mov	ax,		0x13
