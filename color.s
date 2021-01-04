@@ -24,12 +24,24 @@ wait1:	in		al,		dx
 	mov 		ecx,		3
 rep	outsb
 
-	or		dword [color],	0xC0C0C0
-	inc		dword [color]
+	adc		byte [r],	1
+	jnc		set
+
+	adc		byte [g],	1
+	jnc		set
+
+	adc		byte [b],	1
+
+set:	or		byte [r],	0xC0
+	or		byte [g],	0xC0
+	or		byte [b],	0xC0
 
 	jmp		start
 
-color:			dd		0xC0C0C0
+color:
+r:			db	0xC0
+g:			db	0xC0
+b:			db	0xC0
 
 times	510-($-$$) 	db		0
 			dw		0xAA55
