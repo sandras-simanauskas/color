@@ -21,7 +21,7 @@ wait1:	in		al,		dx
 	mov		dx,		0x3C9
 	mov		si,		color
 
-	mov 		ecx,		3
+	mov 		cx,		3
 rep	outsb
 
 	adc		byte [r],	1
