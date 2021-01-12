@@ -44,4 +44,5 @@ g:			db	0xC0
 b:			db	0xC0
 
 times	510-($-$$) 	db		0
-			dw		0xAA55
+			db		0x55
+			db		0xAA
