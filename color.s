@@ -39,9 +39,9 @@ set:	or		byte [r],	0xC0
 	jmp		start
 
 color:
-r:			db	0xC0
-g:			db	0xC0
-b:			db	0xC0
+r:			db		0xC0
+g:			db		0xC0
+b:			db		0xC0
 
 times	510-($-$$) 	db		0
 			db		0x55
