@@ -4,7 +4,7 @@ org	0x7C00
 	mov		ax,		0x13
 	int		0x10
 
-start:	mov		dx,		0x3DA
+loop:	mov		dx,		0x3DA
 
 wait0:	in		al,		dx
 	test		al,		8
@@ -36,7 +36,7 @@ set:	or		byte [r],	0xC0
 	or		byte [g],	0xC0
 	or		byte [b],	0xC0
 
-	jmp		start
+	jmp		loop
 
 color:
 r:			db		0xC0
