@@ -1,8 +1,8 @@
 all:
-	nasm -f bin -o color color.s
+	nasm -f bin -o vgacolor vgacolor.s
 
 clean:
-	rm color
+	rm vgacolor
 
 run:	all
-	qemu-system-i386 -hda color
+	qemu-system-i386 -hda vgacolor
