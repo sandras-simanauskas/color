@@ -5,4 +5,4 @@ run:	all
 	qemu-system-i386 -hda vgacolor
 
 clean:
-	rm vgacolor
+	rm -f vgacolor
