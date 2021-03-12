@@ -1,5 +1,5 @@
 all:
-	nasm -f bin -o vgacolor vgacolor.s
+	nasm -o vgacolor -f bin vgacolor.s
 
 run:	all
 	qemu-system-i386 -hda vgacolor
