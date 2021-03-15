@@ -1,61 +1,62 @@
-bits	16
-org	0x7C00
+.code16
+.global _start
 
-	; Set VGA mode 0x13.
+_start:
+	// Set VGA mode 0x13.
 
-	mov		ax,		0x13
-	int		0x10
+	movw $0x13, %ax
+	int $0x10
 
 loop:
 
-	; Wait until vertical retrace begins.
+	// Wait until vertical retrace begins.
 
-	mov		dx,		0x3DA
+	movw $0x3DA, %dx
 
-wait0:	in		al,		dx
-	test		al,		8
-	jnz		wait0
+wait0:	in %dx, %al
+	testb $8, %al
+	jnz wait0
 
-	; Wait until vertical retrace ends.
+	// Wait until vertical retrace ends.
 
-wait1:	in		al,		dx
-	test		al,		8
-	jz		wait1
+wait1:	in %dx, %al
+	testb $8, %al
+	jz wait1
 
-	; Select color index 0.
+	// Select color index 0.
 
-	xor		al,		al
-	mov		dx,		0x3C8
-	out		dx,		al
+	xorb %al, %al
+	movw $0x3C8, %dx
+	out %al, %dx
 
-	; Write the color.
+	// Write the color.
 
-	mov		dx,		0x3C9
-	mov		si,		color
-	mov 		cx,		3
+	movw $0x3C9, %dx
+	movw $color, %si
+	movw $3, %cx
 rep	outsb
 
-	; Increment the color.
+	// Increment the color.
 
-	adc		byte [r],	1
-	jnc		set
+	adcb $1, (r)
+	jnc set
 
-	adc		byte [g],	1
-	jnc		set
+	adcb $1, (g)
+	jnc set
 
-	adc		byte [b],	1
+	adcb $1, (b)
 
-set:	or		byte [r],	0xC0
-	or		byte [g],	0xC0
-	or		byte [b],	0xC0
+set:	orb $0xC0, (r)
+	orb $0xC0, (g)
+	orb $0xC0, (b)
 
-	jmp		loop
+	jmp loop
 
 color:
-r:			db		0xC0
-g:			db		0xC0
-b:			db		0xC0
+r:	.byte 0xC0
+g:	.byte 0xC0
+b:	.byte 0xC0
 
-times	510-($-$$) 	db		0
-			db		0x55
-			db		0xAA
+. = _start + 510
+	.byte 0x55
+	.byte 0xAA
