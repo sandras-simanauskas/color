@@ -46,6 +46,8 @@ rep	outsb
 
 	adcb $1, (b)
 
+	// Mask the high bits of each color.
+
 set:	orb $0xC0, (r)
 	orb $0xC0, (g)
 	orb $0xC0, (b)
