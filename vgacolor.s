@@ -1,7 +1,8 @@
 .code16
-.global _start
 
+.global _start
 _start:
+
 	// Set VGA mode 0x13.
 
 	movw $0x13, %ax
